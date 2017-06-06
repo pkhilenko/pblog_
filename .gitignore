@@ -27,3 +27,4 @@
 
 config/database.yml
 config/cable.yml
+.comandy.txt
