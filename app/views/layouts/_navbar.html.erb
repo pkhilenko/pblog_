@@ -38,7 +38,7 @@
       <ul class="nav navbar-nav navbar-right">
 
         <% if session[:user] %>
-          <li> <%= @user %> </li>
+          <li><a href="#"><%= session[:user].values.first %></a></li>
           <li><%= link_to 'Выход', logout_path, method: 'delete' %> </li>
         <% else %>
           <li><a href="<%= login_path %>">Вход</a></li>
