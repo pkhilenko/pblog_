@@ -1,19 +1,39 @@
 class UsersController < ApplicationController
-  attr_reader :user
+
+  def index
+    @users = PersonManager.users
+  end
 
   def new
+
   end
 
   def create
-    @user = params[:email]
-    session[:user] =  @user
-    redirect_to root_path
+    @user = Person.new(params[:email].values.first).user
+    session[:user] = @user
+    redirect_to users_path
+  end
+
+  def edit
+    @user = session[:user]
+  end
+
+  def update
+    @user = { 'name' => params[:email].values.first, 'id' => session[:user]['id'] }
+    PersonManager.edit @user
+    session[:user] = @user
+    redirect_to users_path
+  end
+
+  def show
+    @user = { 'name' => PersonManager.users[params[:id].to_i], 'id' => params[:id] }
   end
 
   def destroy
-    @users = nil
+    @user = { 'name' => session[:user]['name'], 'id' => session[:user]['id'] } if session[:user]
+    PersonManager.destroy @user
     session[:user] = nil
-    redirect_to root_path
+    redirect_to users_path
   end
 
 end
