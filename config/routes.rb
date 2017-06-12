@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'user_session/new'
-
   get    'login'   => 'user_session#new'
   post   'login'   => 'user_session#create'
   delete 'logout'  => 'user_session#destroy'

@@ -10,8 +10,7 @@ class UsersController < ApplicationController
 
   def create
     @user = Person.new(params[:email].values.first).user
-    session[:user] = @user
-    redirect_to users_path
+    redirect_to users_path, success: 'Вы успешно зарегистрировались'
   end
 
   def edit
@@ -21,7 +20,6 @@ class UsersController < ApplicationController
   def update
     @user = { 'name' => params[:email].values.first, 'id' => session[:user]['id'] }
     PersonManager.edit @user
-    session[:user] = @user
     redirect_to users_path
   end
 
@@ -33,7 +31,7 @@ class UsersController < ApplicationController
     @user = { 'name' => session[:user]['name'], 'id' => session[:user]['id'] } if session[:user]
     PersonManager.destroy @user
     session[:user] = nil
-    redirect_to users_path
+    redirect_to users_path, success: 'Пользователь успешно удален'
   end
 
 end

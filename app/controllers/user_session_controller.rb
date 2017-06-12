@@ -7,13 +7,13 @@ class UserSessionController < ApplicationController
       @user = PersonManager.users.select { |id, name| name == params[:email].values.first }
       @user = { 'name' => @user.values.first, 'id' => @user.keys.first }
       session[:user] = @user
-      redirect_to users_path
+      redirect_to users_path, success: 'Вы успешно вошли на сайт'
     end
   end
 
   def destroy
     session[:user] = nil
-    redirect_to users_path
+    redirect_to users_path, success: 'Вы успешно вышли с сайта'
   end
 
 end
