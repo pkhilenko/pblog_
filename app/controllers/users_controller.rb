@@ -14,21 +14,26 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = PersonManager.users[params[:id].to_i]
+    @user = PersonManager.new
+    @user = @user.users[params[:id].to_i]
   end
 
   def update
-    PersonManager.edit(params[:id].to_i, params[:email].values.first)
-    redirect_to users_path
+    @user = PersonManager.new
+    @user.person_edit(params[:id].to_i, params[:email].values.first)
+    session[:user] = params[:email].values.first
+    redirect_to users_path, success: 'Пользователь успешно обнавлен'
   end
 
   def show
-    @user = PersonManager.users[params[:id].to_i].user_name
+    @user = PersonManager.new
+    @user = @user.users[params[:id].to_i].user_name
   end
 
   def destroy
     @user = { 'name' => session[:user]['name'], 'id' => session[:user]['id'] } if session[:user]
-    PersonManager.destroy params[:id].to_i
+    @persons = PersonManager.new
+    @persons.person_delete params[:id].to_i
     session[:user] = nil
     redirect_to users_path, success: 'Пользователь успешно удален'
   end
