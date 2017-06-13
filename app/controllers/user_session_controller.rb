@@ -3,11 +3,11 @@ class UserSessionController < ApplicationController
   end
 
   def create
-    if PersonManager.users.has_value?(params[:email].values.first)
-      @user = PersonManager.users.select { |id, name| name == params[:email].values.first }
-      @user = { 'name' => @user.values.first, 'id' => @user.keys.first }
-      session[:user] = @user
+    if PersonManager.users.any? { |id, user| user.user_name == (params[:email].values.first)  }
+      session[:user] = params[:email].values.first
       redirect_to users_path, success: 'Вы успешно вошли на сайт'
+    else
+      render :new
     end
   end
 

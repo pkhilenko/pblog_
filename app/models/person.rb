@@ -1,15 +1,19 @@
 class Person
-  @@user_id = 0
+  attr_reader :user_name, :id
+  attr_writer :user_name
 
-  def initialize(user)
-    @@user_id += 1
-    @name = user
-    @id = @@user_id
-    PersonManager.new(self)
+  def initialize(id, user_name)
+    @user_name = user_name
+    @id = id
   end
 
-  def user
-    {name: @name, id: @id}
+  def to_h
+    { id: @id, user_name: @username }
   end
 
 end
+
+
+
+
+
