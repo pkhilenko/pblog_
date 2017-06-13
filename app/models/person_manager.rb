@@ -2,11 +2,6 @@ class PersonManager
   @@users ||= {}
   @@user_id ||= 0
   @@user_count ||= 0
-  @@useras = 23
-
-  def self.users
-    @@users
-  end
 
   def users
     @@users
@@ -26,8 +21,3 @@ class PersonManager
     @@users.delete(user_id)
   end
 end
-
-# pm = PersonManager.new
-# p = PersonManager.create_person('Petr')
-# pm.add_user(p)
-
