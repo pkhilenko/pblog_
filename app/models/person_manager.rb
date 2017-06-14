@@ -13,6 +13,10 @@ class PersonManager
     @@users[@@user_id] = Person.new(@@user_id, name)
   end
 
+  def self.delete_all_persons
+    @@users = {}
+  end
+
   def person_edit(id, user_name)
     @@users[id].user_name = user_name
   end
@@ -20,4 +24,6 @@ class PersonManager
   def person_delete(user_id)
     @@users.delete(user_id)
   end
+
+
 end

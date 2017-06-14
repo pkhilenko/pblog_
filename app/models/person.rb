@@ -8,12 +8,9 @@ class Person
   end
 
   def to_h
-    { id: @id, user_name: @username }
+    { id: @id, user_name: @user_name }
   end
 
 end
-
-
-
 
 
