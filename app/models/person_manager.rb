@@ -23,7 +23,6 @@ class PersonManager
     @peron = Person.new(@@user_id, name)
     @@users[@@user_id] = @peron
     session[:users] = @@users
-    session[:user] = @person
   end
 
   def self.delete_all_persons
@@ -39,7 +38,7 @@ class PersonManager
   end
 
   def init_from_session
-    @session[:users].each{ |id, name| @users[id.to_i] = name } if @session[:users]
+   @users = @session[:users]
   end
 
 

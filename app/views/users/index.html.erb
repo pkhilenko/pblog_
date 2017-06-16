@@ -1,7 +1,8 @@
 <h2>Все пользователи</h2>
 <% if @users %>
 
- <% @users.each do |id, user| %>
-   <p><%= id %>: <%= link_to user['user_name'], user_path(id) %>  </p>
+ <% @users.each do |user| %>
+   <p><%= user['id'] %>: <%= link_to user['user_name'], user_path(user['id']) %>  </p>
  <% end %>
 <% end %>
+<%= session[:user] %>

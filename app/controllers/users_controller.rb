@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :setup_person_manager, only: [:index, :edit, :update, :show, :destroy]
 
   def index
-    @users =  @person_manager.users.each { |id, user| user['user_name'] } || nil
+    @users =  @person_manager.users.map { |id, user| user }
   end
 
   def new
@@ -15,17 +15,17 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = @person_manager.users[params[:id].to_i]
+    @user = @person_manager.users[params[:id]]
   end
 
   def update
-    @person_manager.person_edit(params[:id].to_i, params[:email].values.first)
-    session[:user] = params[:email].values.first
+    @person_manager.person_edit(params[:id], params[:email].values.first)
+    session[:user] = { 'id' => params[:id].to_i, 'user_name' => params[:email].values.first}
     redirect_to users_path, success: 'Пользователь успешно обнавлен'
   end
 
   def show
-    @user = @person_manager.users[params[:id].to_i]
+    @user = @person_manager.users[params[:id]]
   end
 
   def destroy
