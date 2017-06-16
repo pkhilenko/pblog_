@@ -1,6 +1,7 @@
 <h2>Все пользователи</h2>
 <% if @users %>
+
  <% @users.each do |id, user| %>
-   <p><%= id %>: <%= link_to user.user_name, user_path(id) %>  </p>
+   <p><%= id %>: <%= link_to user['user_name'], user_path(id) %>  </p>
  <% end %>
 <% end %>

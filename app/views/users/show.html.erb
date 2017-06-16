@@ -1,8 +1,7 @@
 
-<h1><%= @user %></h1>
-<h3><%= p session[:user] %></h3>
-<% if session[:user] == @user  %>
- <p><%= link_to 'Редактировать', edit_user_path %> <%= link_to 'Удалить пользователя', user_path, method: :delete %></p>
+<h1><%= @user['user_name'] %></h1>
+<% if session[:user] == @user['user_name']  %>
+ <p><%= link_to 'Редактировать', edit_user_path %> <%= link_to 'Удалить пользователя', user_path(@user['id']), method: :delete %></p>
 <% end %>
 
 
