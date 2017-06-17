@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :setup_person_manager, only: [:index, :edit, :update, :show, :destroy]
+  before_action :setup_person_manager
 
   def index
     @users =  @person_manager.users.map { |id, user| user }
@@ -10,7 +10,9 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = PersonManager.create_person(params[:email].values.first, session)
+    @user = PersonManager.create_person(params[:email].values.first)
+    @person_manager.add_person @user
+    @person_manager.save_users
     redirect_to users_path, success: 'Вы успешно зарегистрировались'
   end
 

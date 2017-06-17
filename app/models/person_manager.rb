@@ -4,7 +4,6 @@ class PersonManager
   @@user_count ||= 0
 
   def initialize(session)
-    @users = {}
     @session = session
     init_from_session
   end
@@ -17,16 +16,18 @@ class PersonManager
     @users.dup
   end
 
-  def self.create_person(name, session)
+  def self.create_person(name)
     @@user_id += 1
     @@user_count += 1
-    @peron = Person.new(@@user_id, name)
-    @@users[@@user_id] = @peron
-    session[:users] = @@users
+    @person = Person.new(@@user_id, name)
   end
 
-  def self.delete_all_persons
-    @@users = {}
+  def add_person(person)
+    @users[person.id] = person
+  end
+
+  def save_users
+    @session[:users] = @users
   end
 
   def person_edit(id, user_name)
@@ -38,8 +39,7 @@ class PersonManager
   end
 
   def init_from_session
-   @users = @session[:users]
+   @users = @session[:users] || {}
   end
-
 
 end
