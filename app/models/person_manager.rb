@@ -31,15 +31,18 @@ class PersonManager
   end
 
   def person_edit(id, user_name)
-    @users[id]['user_name'] = user_name
+    @users[id] = Person.new(id, user_name)
+    save_users
   end
 
   def person_delete(user_id)
     @users.delete(user_id)
+    save_users
   end
 
   def init_from_session
-   @users = @session[:users] || {}
+    @users ||= {}
+    @session[:users].each { | id, user |  add_person(Person.new(user['id'], user['user_name'])) } if @session[:users]
   end
 
 end

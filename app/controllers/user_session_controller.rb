@@ -4,8 +4,8 @@ class UserSessionController < ApplicationController
 
   def create
     @person_manager = PersonManager.new(session)
-    if @person_manager.users.any? { |id, user| user['user_name'] == (params[:email].values.first)  }
-      @person = @person_manager.users.values.select { |obj| obj['user_name'] == params[:email].values.first }.first
+    if @person_manager.users.any? { |id, user| user.user_name == (params[:email].values.first)  }
+      @person = @person_manager.users.values.select { |obj| obj.user_name == params[:email].values.first }.first
       session[:user] = @person
       redirect_to users_path, success: 'Вы успешно вошли на сайт'
     else
