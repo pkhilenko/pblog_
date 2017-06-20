@@ -1,0 +1,10 @@
+<h2>Все пользователи</h2>
+<% if @persons %>
+ <% @persons.each do |person| %>
+ <% if person.id and person.name %>
+   <p><%= person.id %>: <%= link_to person.name, person_path(person.id) %>  </p>
+   <% end %>
+ <% end %>
+<% end %>
+<br>
+

@@ -8,13 +8,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <a class="navbar-brand" href="/">pblog</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Ссылка</a></li>
+        <li class="active"><a href="<%= persons_path %>">Persons</a></li>
         <li><a href="#">Ссылка</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
@@ -41,8 +41,8 @@
           <li><a href="#">User_<%= session[:user]['user_name'] %></a></li>
           <li><%= link_to 'Выход', logout_path, method: 'delete' %> </li>
         <% else %>
-          <li><a href="<%= new_user_path %>">Sign Up</a></li>
-          <li><a href="<%= login_path %>">Вход</a></li>
+          <li><a href="<%= new_person_path %>">New Person</a></li>
+          <li><a href="#<%#= login_path %>">Вход</a></li>
         <% end %>
 
         <li class="dropdown">

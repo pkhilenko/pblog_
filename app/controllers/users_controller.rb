@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :setup_person_manager
 
   def index
-    @users =  @person_manager.users.map { |id, user| user }
+    @persons =  @person_manager.each_person { |person| {} << person }
   end
 
   def new
@@ -10,9 +10,9 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = PersonManager.create_person(params[:email].values.first)
-    @person_manager.add_person @user
-    @person_manager.save_users
+    @person = @person_factory.create_person(params[:email])
+    @person_manager.set_person @person
+    @person_manager.save_persons
     redirect_to users_path, success: 'Вы успешно зарегистрировались'
   end
 
@@ -38,7 +38,8 @@ class UsersController < ApplicationController
   end
 
   def setup_person_manager
-    @person_manager = PersonManager.new(session)
+    @person_manager = PersonManager.new(PersonSessionStore.new(session))
+    @person_factory = PersonFactory.new(@person_manager.max_id)
   end
 
 end

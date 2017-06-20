@@ -1,48 +1,42 @@
 class PersonManager
-  @@users ||= {}
-  @@user_id ||= 0
-  @@user_count ||= 0
 
-  def initialize(session)
-    @session = session
-    init_from_session
+  def initialize(store)
+    @store = store
+    @persons = @store.read
   end
 
-  def self.users
-    @@users
+  def all
+    @persons.dup
   end
 
-  def users
-    @users.dup
+  def persons_count
+    @persons.keys.count
   end
 
-  def self.create_person(name)
-    @@user_id += 1
-    @@user_count += 1
-    @person = Person.new(@@user_id, name)
+  def max_id
+    @persons.keys.max.to_i  || 0
   end
 
-  def add_person(person)
-    @users[person.id] = person
+  def each_person
+    @persons.each_key do |id|
+      yield @persons[id]
+    end
   end
 
-  def save_users
-    @session[:users] = @users
+  def save_persons
+    @store.write(@persons)
   end
 
-  def person_edit(id, user_name)
-    @users[id] = Person.new(id, user_name)
-    save_users
+  def get_person(id)
+    @persons[id]
   end
 
-  def person_delete(user_id)
-    @users.delete(user_id)
-    save_users
+  def set_person(person)
+    @persons[person.id] = person if person
   end
 
-  def init_from_session
-    @users ||= {}
-    @session[:users].each { | id, user |  add_person(Person.new(user['id'], user['user_name'])) } if @session[:users]
+  def remove_person(person)
+    @persons.delete(person.id)  if person
   end
 
 end

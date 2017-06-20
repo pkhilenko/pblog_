@@ -1,0 +1,5 @@
+<% if @person %>
+<h1><%= @person.name %></h1>
+   <p><%= link_to 'Редактировать', edit_person_path %><%= link_to 'Удалить пользователя', person_path(@person.id), method: :delete %></p>
+<% end %>
+
