@@ -3,7 +3,7 @@
 <h1>Изменить <%= @person.id %>: <%= @person.name %> </h1>
       Введите email:
     <%= form_tag(controller: 'persons', action: 'update', method: :patch ) do   %>
-      <%= email_field :email, class: 'form-control', value: @person.name %>
+      <%= email_field :email, class: 'form-control' %>
       <%= hidden_field_tag :id, value: @person.id %>
       <%= submit_tag "Обновить", class: "btn btn-primary" %>
 

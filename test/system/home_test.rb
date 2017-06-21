@@ -6,56 +6,42 @@ class HomeTest < ApplicationSystemTestCase
     assert_selector "h1", text: "Hi All!"
   end
 
-  test 'signup user' do
+  test 'New Person' do
     visit root_url
-    click_on 'Sign Up'
+    click_on 'New Person'
     fill_in 'email[{:class=>"form-control"}]', with: 'vasya@mail.ru'
-    click_on 'Log in'
+    click_on 'Save'
     assert_text 'vasya@mail.ru'
   end
 
-  test 'delete user' do
+  test 'Show Person' do
     visit root_url
-    click_on 'Sign Up'
-    fill_in 'email[{:class=>"form-control"}]', with: 'vaska@mail.ru'
-    click_on 'Log in'
-    assert_text 'vaska@mail.ru'
-    click_on 'Вход'
-    fill_in 'email[{:class=>"form-control"}]', with: 'vaska@mail.ru'
-    click_on 'Log in'
-    assert_text 'Вы успешно вошли на сайт'
-    visit users_url
-    click_on 'vaska@mail.ru'
-    assert_selector "h1", text: 'vaska@mail.ru'
-    click_on 'vaska@mail.ru'
+    click_on 'New Person'
+    fill_in 'email[{:class=>"form-control"}]', with: 'gena@ya.ru'
+    click_on 'Save'
+    click_on 'gena@ya.ru'
+    assert_selector 'h1', text: 'gena@ya.ru'
+  end
+
+  test 'Edit Person' do
+    visit root_url
+    click_on 'New Person'
+    fill_in 'email[{:class=>"form-control"}]', with: 'gena@mail.ru'
+    click_on 'Save'
+    click_on 'gena@mail.ru'
+    click_on 'Редактировать'
+    fill_in 'email[{:class=>"form-control"}]', with: 'john@mail.ru'
+    click_on 'Обновить'
+    assert_text 'john@mail.ru'
+  end
+
+  test 'Delete Person' do
+    visit root_url
+    click_on 'New Person'
+    fill_in 'email[{:class=>"form-control"}]', with: 'gena@gmail.com'
+    click_on 'Save'
+    click_on 'gena@gmail.com'
     click_on 'Удалить пользователя'
-    assert_text 'Пользователь успешно удален'
-  end
-
-
-  test 'login user' do
-    visit root_url
-    click_on 'Sign Up'
-    fill_in 'email[{:class=>"form-control"}]', with: 'vasya@mail.ru'
-    click_on 'Log in'
-    assert_text 'vasya@mail.ru'
-    click_on 'Вход'
-    fill_in 'email[{:class=>"form-control"}]', with: 'vasya@mail.ru'
-    click_on 'Log in'
-    assert_text 'Вы успешно вошли на сайт'
-  end
-
-  test 'logout user' do
-    visit root_url
-    click_on 'Sign Up'
-    fill_in 'email[{:class=>"form-control"}]', with: 'vasya@mail.ru'
-    click_on 'Log in'
-    assert_text 'vasya@mail.ru'
-    click_on 'Вход'
-    fill_in 'email[{:class=>"form-control"}]', with: 'vasya@mail.ru'
-    click_on 'Log in'
-    assert_text 'Вы успешно вошли на сайт'
-    click_on 'Выход'
-    assert_text 'Вы успешно вышли с сайта'
+    refute_text 'gena@gmail.com'
   end
 end

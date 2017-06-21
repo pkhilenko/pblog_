@@ -1,6 +1,6 @@
 class PersonsController < ApplicationController
   before_action :setup_person_manager
-  before_action :set_person
+  before_action :set_person, only: [:show, :edit, :update, :destroy]
 
   def index
     @persons =  @person_manager.all.values
