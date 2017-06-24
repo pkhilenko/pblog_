@@ -8,7 +8,7 @@ class PersonSessionStore
     result = {}
     persons = @session[:persons] || {}
     persons.each_key do |id|
-      result[id] = Person.new(id, persons[id]['name'])
+      result[id] = Person.new(id, persons[id]['name'], persons[id]['email'], persons[id]['date_of_birth'], persons[id]['salary'] )
     end
     result
   end

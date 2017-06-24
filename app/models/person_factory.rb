@@ -4,9 +4,9 @@ class PersonFactory
     @id = max_id
   end
 
-  def create_person(name)
+  def create_person(name, email, date_of_birth, salary)
     @id += 1
-    Person.new(@id, name)
+    Person.new(@id, name, email, date_of_birth, salary)
   end
 
 end

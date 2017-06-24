@@ -14,6 +14,17 @@ class HomeTest < ApplicationSystemTestCase
     assert_text 'vasya@mail.ru'
   end
 
+  test 'persons_count' do
+    visit root_url
+    click_on 'New Person'
+    fill_in 'email[{:class=>"form-control"}]', with: 'vasya@qwerty.ru'
+    click_on 'Save'
+    click_on 'New Person'
+    fill_in 'email[{:class=>"form-control"}]', with: 'vasya@google.com'
+    click_on 'Save'
+    assert_selector "h1", text: "Persons: (2)"
+  end
+
   test 'Show Person' do
     visit root_url
     click_on 'New Person'

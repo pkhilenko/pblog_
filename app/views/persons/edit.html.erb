@@ -1,12 +1,24 @@
 <div class="col-md-6 col-md-offset-3">
-<% if @person %>
-<h1>Изменить <%= @person.id %>: <%= @person.name %> </h1>
-      Введите email:
-    <%= form_tag(controller: 'persons', action: 'update', method: :patch ) do   %>
-      <%= email_field :email, class: 'form-control' %>
-      <%= hidden_field_tag :id, value: @person.id %>
+<h1>Изменить</h1>
+"<%= @person.name %>"
+    <%= form_tag(controller: 'persons', action: 'update', method: :patch ) do %>
+      <div class="form-group">
+        <%= label_tag(:name, "ФИО:") %>
+        <%= text_field :name, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= label_tag(:email) %>
+        <%= email_field :email, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= label_tag(:date_of_birth, "Дата рождения") %>
+        <%= date_field :date_of_birth, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= label_tag(:salary, "Зарплата:") %>
+        <%= number_field :salary, class: 'form-control' %>
+      </div>
       <%= submit_tag "Обновить", class: "btn btn-primary" %>
 
-    <% end %>
     <% end %>
  </div>

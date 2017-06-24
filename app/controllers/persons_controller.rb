@@ -3,15 +3,13 @@ class PersonsController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 
   def index
-    @persons =  @person_manager.all.values
   end
 
   def new
-
   end
 
   def create
-    @person = @person_factory.create_person(params[:email].values.first)
+    @person = @person_factory.create_person(params[:name].values.first, params[:email].values.first, params[:date_of_birth].values.first, params[:salary].values.first)
     @person_manager.set_person @person
     @person_manager.save_persons
     redirect_to persons_path, success: 'Вы успешно зарегистрировались'
@@ -24,7 +22,10 @@ class PersonsController < ApplicationController
   end
 
   def update
-    @person.name = params[:email].values.first
+    @person.name = params[:name].values.first
+    @person.email = params[:email].values.first
+    @person.date_of_birth = params[:date_of_birth].values.first
+    @person.salary = params[:salary].values.first
     @person_manager.set_person(@person)
     @person_manager.save_persons
     redirect_to persons_path, success: 'Пользователь успешно обнавлен'
