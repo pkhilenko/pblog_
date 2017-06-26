@@ -9,7 +9,7 @@ class PersonsController < ApplicationController
   end
 
   def create
-    @person = @person_factory.create_person(params[:name].values.first, params[:email].values.first, params[:date_of_birth].values.first, params[:salary].values.first)
+    @person = @person_factory.create_person(params[:name], params[:email], params[:date_of_birth], params[:salary])
     @person_manager.set_person @person
     @person_manager.save_persons
     redirect_to persons_path, success: 'Вы успешно зарегистрировались'
@@ -22,10 +22,10 @@ class PersonsController < ApplicationController
   end
 
   def update
-    @person.name = params[:name].values.first
-    @person.email = params[:email].values.first
-    @person.date_of_birth = params[:date_of_birth].values.first
-    @person.salary = params[:salary].values.first
+    @person.name = params[:name]
+    @person.email = params[:email]
+    @person.date_of_birth = params[:date_of_birth]
+    @person.salary = params[:salary]
     @person_manager.set_person(@person)
     @person_manager.save_persons
     redirect_to persons_path, success: 'Пользователь успешно обнавлен'
