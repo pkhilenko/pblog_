@@ -6,10 +6,11 @@ class PersonsController < ApplicationController
   end
 
   def new
+    @person = Person.new(0, {})
   end
 
   def create
-    @person = @person_factory.create_person(params[:name], params[:email], params[:date_of_birth], params[:salary])
+    @person = @person_factory.build params[:person]
     @person_manager.set_person @person
     @person_manager.save_persons
     redirect_to persons_path, success: 'Вы успешно зарегистрировались'
@@ -43,6 +44,6 @@ class PersonsController < ApplicationController
   end
 
   def set_person
-    @person = @person_manager.get_person(params[:id])
+    @person = @person_manager.get_person(params[:id].to_i)
   end
 end

@@ -1,12 +1,11 @@
 class PersonFactory
 
   def initialize(max_id)
-    @id = max_id
+    @last_created_id = max_id
   end
 
-  def create_person(name, email, date_of_birth, salary)
-    @id += 1
-    Person.new(@id, name, email, date_of_birth, salary)
+  def build(attrs)
+    Person.new(@last_created_id += 1, attrs)
   end
 
 end

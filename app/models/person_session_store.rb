@@ -5,21 +5,11 @@ class PersonSessionStore
   end
 
   def read
-    result = {}
     persons = @session[:persons] || {}
-    persons.each_key do |id|
-      result[id] = Person.new(id, persons[id]['name'], persons[id]['email'], persons[id]['date_of_birth'], persons[id]['salary'] )
-    end
-    result
+    persons.keys.inject({}) { |h, id| h[id.to_i] = Person.new(id.to_i,  persons[id]); h }
   end
-
 
   def write(persons)
-    result = {}
-    persons.each_value do |person|
-      result[person.id] = person.to_h
-    end
-    @session[:persons] = result
+    @session[:persons] = persons.values.inject({}) { |h, person| h[person.id] = person.to_h; h }
   end
-
 end

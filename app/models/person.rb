@@ -1,18 +1,20 @@
 class Person
+  include ActiveModel::Model
 
-  attr_reader :id
-  attr_accessor :name, :email, :date_of_birth, :salary
+  READ_FIELDS = %i(id)
+  WRITE_FIELDS = %i(name email date_of_birth salary)
+  ALL_FIELDS = READ_FIELDS + WRITE_FIELDS
 
-  def initialize(id, name, email, date_of_birth, salary)
+  READ_FIELDS.each { |field| attr_reader field }
+  WRITE_FIELDS.each { |field| attr_accessor field }
+
+  def initialize(id, attrs)
     @id = id
-    @name = name
-    @email = email
-    @date_of_birth = date_of_birth
-    @salary = salary
+    WRITE_FIELDS.each { |field| self.send("#{field}=", attrs[field.to_s])}
   end
 
   def to_h
-    { id: @id, name: @name, email: @email, date_of_birth: @date_of_birth, salary: @salary }
+    ALL_FIELDS.inject({}) { |h, field| h[field] = send(field); h }
   end
 
 end

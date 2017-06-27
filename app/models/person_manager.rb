@@ -6,7 +6,7 @@ class PersonManager
   end
 
   def all
-    @persons.dup
+    @persons
   end
 
   def persons_count
@@ -38,5 +38,4 @@ class PersonManager
   def remove_person(person)
     @persons.delete(person.id)  if person
   end
-
 end
