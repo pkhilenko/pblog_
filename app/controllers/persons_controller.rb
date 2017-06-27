@@ -39,7 +39,7 @@ class PersonsController < ApplicationController
   end
 
   def setup_person_manager
-    @person_manager = PersonManager.new(PersonSessionStore.new(session))
+    @person_manager = PersonManager.new(PersonFileStore.new)
     @person_factory = PersonFactory.new(@person_manager.max_id)
   end
 

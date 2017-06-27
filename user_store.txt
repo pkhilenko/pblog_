@@ -1,0 +1,1 @@
+{1=>{:id=>1, :name=>"vasya", :email=>nil, :date_of_birth=>nil, :salary=>nil}, 2=>{:id=>2, :name=>"sr", :email=>"d@w.w", :date_of_birth=>"", :salary=>""}}
