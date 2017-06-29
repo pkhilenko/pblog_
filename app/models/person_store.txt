@@ -1,1 +1,0 @@
-{"1":{"id":1,"name":"vasya","email":"q@ssd.we","date_of_birth":"2222-02-11","salary":"222"},"3":{"id":3,"name":"dd","email":"w@w.w","date_of_birth":"1111-11-11","salary":"1111"}}

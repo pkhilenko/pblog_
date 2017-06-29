@@ -13,7 +13,7 @@ class PersonsController < ApplicationController
     @person = @person_factory.build params[:person]
     @person_manager.set_person @person
     @person_manager.save_persons
-    redirect_to persons_path, success: 'Вы успешно зарегистрировались'
+    redirect_to persons_path, success: 'Пользователь успешно добавлен'
   end
 
   def show

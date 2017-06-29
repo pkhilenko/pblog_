@@ -6,7 +6,7 @@ class PersonManager
   end
 
   def all
-    @persons
+    @persons.dup
   end
 
   def persons_count
