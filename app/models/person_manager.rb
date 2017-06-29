@@ -5,10 +5,6 @@ class PersonManager
     @persons = @store.read
   end
 
-  def all
-    @persons.dup
-  end
-
   def persons_count
     @persons.keys.count
   end
