@@ -38,6 +38,8 @@ class PersonsController < ApplicationController
     redirect_to persons_path, success: 'Пользователь успешно удален'
   end
 
+  private
+
   def setup_person_manager
     @person_manager = PersonManager.new(PersonFileStore.new)
     @person_factory = PersonFactory.new(@person_manager.max_id)
