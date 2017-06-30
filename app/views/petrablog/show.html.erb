@@ -1,0 +1,5 @@
+<% if @person %>
+<h1><%= @person.name %></h1>
+   <p><%= link_to 'Редактировать', edit_petrablog_path %><%= link_to 'Удалить пользователя', petrablog_path(@person.id), method: :delete %></p>
+<% end %>
+

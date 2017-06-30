@@ -1,0 +1,43 @@
+<div class="row">
+<div class="col-xs-8">
+  <h1>Пользователи (<%= @person_manager.persons_count %>)</h1>
+</div>
+<div class="col-xs-4">
+  <div class="pull-right">
+    <%= link_to 'Новый', new_person_path, class: 'btn btn-primary btn-sm mg-top-24' %>
+  </div>
+</div>
+</div>
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>№</th>
+      <th></th>
+      <th>ID</th>
+      <th>Имя</th>
+      <th>Дата рождения</th>
+      <th>Email</th>
+      <th>Зарплата</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% row_index = 0 %>
+    <% @person_manager.each_person do |person| %>
+      <% row_index += 1 %>
+      <tr>
+        <td class="td-18 td-right"><%= row_index %></td>
+        <td class="td-18"><%= link_to icon('fa-edit', 'редактировать'), edit_petrablog_path(person.id) %></td>
+        <td class="td-18 td-right"><%= person.id %></td>
+        <td><%= link_to person.name, petrablog_path(person.id) %></td>
+        <td class="td-130"><%= person.date_of_birth %></td>
+        <td class="td-18"><%= person.email %></td>
+        <td class="td-18 td-right"><%= person.salary %></td>
+
+        <td class="td-18"><%= link_to icon('fa-trash', 'удалить'), petrablog_path(person.id),
+          method: :delete, data: {confirm: 'Действительно удалить?'} %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

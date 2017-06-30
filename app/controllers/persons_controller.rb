@@ -13,7 +13,7 @@ class PersonsController < ApplicationController
     @person = @person_factory.build params[:person]
     @person_manager.set_person @person
     @person_manager.save_persons
-    redirect_to persons_path, success: 'Вы успешно зарегистрировались'
+    redirect_to persons_path, success: 'Пользователь успешно добавлен'
   end
 
   def show
@@ -38,8 +38,10 @@ class PersonsController < ApplicationController
     redirect_to persons_path, success: 'Пользователь успешно удален'
   end
 
+  private
+
   def setup_person_manager
-    @person_manager = PersonManager.new(PersonSessionStore.new(session))
+    @person_manager = PersonManager.new(PersonFileStore.new)
     @person_factory = PersonFactory.new(@person_manager.max_id)
   end
 
