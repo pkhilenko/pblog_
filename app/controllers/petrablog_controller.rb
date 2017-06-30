@@ -1,7 +1,12 @@
 class PetrablogController < ApplicationController
-  include HTTParty
-
+  before_action :setup_person_manager
   def index
-    @persons = HTTParty.get('http://127.0.0.1:3000/persons')
+     render 'persons/index'
   end
+
+  def setup_person_manager
+    @person_manager = PersonManager.new(PersonJsonApiStore.new)
+    @person_factory = PersonFactory.new(@person_manager.max_id)
+  end
+
 end
